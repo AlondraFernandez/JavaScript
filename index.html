@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Carrito de Compras</title>
 </head>
 <body>
-    <h1>Pedi tu credito aqui</h1>
-<script src="./js/index.js"></script>
+    <header>
+        <h1>Pizzeria Jope</h1>
+    </header>
+
+    <main>
+        <input type="text" id="buscar" placeholder="el verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
+        <div id="productos"></div>
+        <button onclick="mostrarCarrito()"><img src="./assets/img/shopping-bag.png" alt=""></button>
+    </main>
+    <footer>
+    </footer>
+    <script src="./js/index.js"></script>
 </body>
 </html>
