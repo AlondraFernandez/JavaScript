@@ -35,30 +35,6 @@ function eliminarDelCarrito(id) {
     }
 }
 
-/*cuenta
-function mostrarCarrito() {
-    if (carrito.length === 0) {
-        alert('por favor seleccione un producto');
-        return;
-    }
-    let total = 0;
-    let mensaje = 'el carrito del hambre:\n';
-    carrito.forEach((comida, index) => {
-        const precioTotal = comida.precio * (1 - comida.descuento / 100);
-        mensaje += `${index + 1}. ${comida.nombre} - Precio: $${precioTotal.toFixed(2)}\n`;
-    });
-    mensaje += `\n su cuenta es: $${total.toFixed(2)}\n`;
-    mensaje += '\n¿Queres eliminar algún producto del carrito?';
-    const respuesta = prompt(mensaje);
-    if (respuesta !== null) {
-        const numero = parseInt(respuesta);
-        if (!isNaN(numero) && numero > 0 && numero <= carrito.length) {
-            eliminarDelCarrito(carrito[numero - 1].id);
-        } else {
-            alert('No tenes nada en esa opcion.');
-        }
-    }
-}*/
 
 // filtrar por los nombres
 function filtrarProductos() {
