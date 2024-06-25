@@ -3,85 +3,117 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: black;
-    color: #343a40;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 header {
     text-align: center;
-    color: #E61D0F;
-    font-size: 2em;
+    padding: 20px;
+    background-color: #ff0000;
+    border-bottom: 1px solid #f11b03;
 }
 
-
-#buscar {
-    display: block;
-    margin: 20px auto;
-    padding: 10px;
-    width: 50%;
-    font-size: 16px;
-    border: 1px solid #FAF3DD;
-    border-radius: 5px;
+main {
+    padding: 30px;
 }
 
 #productos {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
-    padding: 20px;
 }
 
 .producto {
-    border: 2px solid #ff0101;
+    border: 1px solid #ff3300;
+    padding: 10px;
     border-radius: 5px;
-    padding: 20px;
-    width: 200px;
     text-align: center;
-    background-color: #373B43;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    width: 200px;
 }
 
-.producto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.carrito {
+    position: fixed;
+    top: 10px;
+    right: 5px;
+    width: 200px;
+    border: 1px solid #ff5500;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffdd00;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-image: url(../assets/img/shopping-bag.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
-.producto h2 {
-    font-size: 1.5em;
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
-    color: #ff0202;
 }
 
-.producto p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #FAF3DD;
+.total, .opciones, .nombre, .direccion {
+    margin-top: 10px;
 }
 
 button {
-    display: block;
-    margin: 20px auto;
+    background-color: #ffc400;
+    color: rgb(255, 0, 0);
+    border: none;
     padding: 10px 20px;
-    background-color: #fc0707;
-    color: black;
-    border: solid, 1px, black;
     border-radius: 5px;
-    font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #fff700;
-    transform: scale(1.05);
-    border: solid, 1px, black;
+    background-color: #f6faff;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+.carrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.admin-item {
+    margin-bottom: 10px;
+}
+.producto, .carrito-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.total, .opciones, .nombre, .direccion {
+    margin-top: 10px;
+}
+#admin {
+    display: none;
+}
+#loginModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+#loginModalContent {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
 }

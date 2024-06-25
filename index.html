@@ -9,15 +9,38 @@
 <body>
     <header>
         <h1>Pizzeria Jope</h1>
+        <button onclick="mostrarLoginModal()">Admin</button>
     </header>
 
     <main>
-        <input type="text" id="buscar" placeholder="el verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
+        <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
         <div id="productos"></div>
-        <button onclick="mostrarCarrito()"><img src="./assets/img/shopping-bag.png" alt=""></button>
+        <div id="carrito" class="carrito"></div>
+        <section id="admin">
+            <h2>Administrar Productos</h2>
+            <div>
+                <input type="text" id="nuevoNombre" placeholder="Nombre del Producto">
+                <input type="number" id="nuevoPrecio" placeholder="Precio del Producto">
+                <button onclick="agregarProducto()">Agregar Producto</button>
+            </div>
+            <div id="listaAdmin"></div>
+        </section>
     </main>
-    <footer>
-    </footer>
+
+    <div id="loginModal">
+        <div id="loginModalContent">
+            <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
+            <h2>Admin Login</h2>
+            <input type="text" id="adminUser" placeholder="Usuario">
+            <input type="password" id="adminPassword" placeholder="Contraseña">
+            <button onclick="login()">Ingresar</button>
+        </div>
+    </div>
+
+    <footer></footer>
     <script src="./js/index.js"></script>
 </body>
 </html>
+
+
+
