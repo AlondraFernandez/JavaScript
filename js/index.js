@@ -9,8 +9,8 @@ let nextId = 4; // Para asignar IDs únicos a los nuevos productos
 
 // Credenciales de administrador
 const adminCredentials = {
-    user: 'admin',
-    password: 'admin123'
+    user: 'jope',
+    password: 'jope123'
 };
 
 // Función para crear un elemento con clase y contenido opcional
@@ -111,7 +111,7 @@ function mostrarCarrito() {
     carritoDiv.innerHTML = '';
 
     if (carrito.length === 0) {
-        carritoDiv.innerHTML = '<p>El carrito está vacío</p>';
+        carritoDiv.innerHTML = 'el carrito esta vacio';
         return;
     }
 
@@ -169,7 +169,7 @@ function toggleOpcionesEntrega(delivery) {
 
 // Enviar pedido por WhatsApp
 function enviarPedido() {
-    const numeroWhatsApp = '2302344813';
+    const numeroWhatsApp = '+542302344813';
     const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
     let mensajeCompleto;
 

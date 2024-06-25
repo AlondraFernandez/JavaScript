@@ -22,6 +22,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-top: 10px;
 }
 
 .producto {
@@ -73,8 +74,8 @@ button:hover {
 input[type="text"] {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #dee2e6;
+    margin-top: 5px ;
+    border: 2px solid #ff0000;
     border-radius: 5px;
 }
 .carrito {
@@ -104,8 +105,8 @@ input[type="text"] {
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Ajustar el ancho según sea necesario */
-    max-width: 400px; /* Máximo ancho del modal */
+    width: 100vh; /* Ajustar el ancho según sea necesario */
+    max-width: 400vh; /* Máximo ancho del modal */
     position: relative;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 5px;
