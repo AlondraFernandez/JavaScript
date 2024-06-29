@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "Pizza Margarita",
+        "precio": 800
+    },
+    {
+        "id": 2,
+        "nombre": "Pizza Pepperoni",
+        "precio": 850
+    },
+    {
+        "id": 3,
+        "nombre": "Pizza Cuatro Quesos",
+        "precio": 900
+    }
+]

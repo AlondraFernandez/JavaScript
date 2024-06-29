@@ -1,17 +1,37 @@
-const mercaderia = [
-    { id: 1, nombre: 'Pizza', precio: 5000},
-    { id: 2, nombre: 'Empanadas', precio: 8000},
-    { id: 3, nombre: 'Tartas', precio: 4000},
-];
-
+let mercaderia = [];
 let carrito = [];
 let nextId = 4; // Para asignar IDs únicos a los nuevos productos
 
 // Credenciales de administrador
 const adminCredentials = {
-    user: 'jope',
-    password: 'jope123'
+    user: 'admin',
+    password: 'admin123'
 };
+
+// Cargar productos desde localStorage o JSON
+function cargarProductos() {
+    const productosGuardados = localStorage.getItem('mercaderia');
+    if (productosGuardados) {
+        mercaderia = JSON.parse(productosGuardados);
+        nextId = Math.max(...mercaderia.map(p => p.id)) + 1;
+        mostrarProductos();
+        mostrarProductosAdmin();
+    } else {
+        fetch('./productos.json')
+            .then(response => response.json())
+            .then(data => {
+                mercaderia = data;
+                guardarProductos();
+                mostrarProductos();
+                mostrarProductosAdmin();
+            });
+    }
+}
+
+// Guardar productos en localStorage
+function guardarProductos() {
+    localStorage.setItem('mercaderia', JSON.stringify(mercaderia));
+}
 
 // Función para crear un elemento con clase y contenido opcional
 function crearElemento(tag, clase, contenido) {
@@ -58,6 +78,7 @@ function agregarProducto() {
     if (nombre && !isNaN(precio) && precio > 0) {
         const nuevoProducto = { id: nextId++, nombre, precio };
         mercaderia.push(nuevoProducto);
+        guardarProductos();
         mostrarProductos();
         mostrarProductosAdmin();
         document.getElementById('nuevoNombre').value = '';
@@ -72,6 +93,7 @@ function modificarProducto(id, campo, valor) {
     const producto = mercaderia.find(r => r.id === id);
     if (producto) {
         producto[campo] = campo === 'precio' ? parseInt(valor) : valor;
+        guardarProductos();
         mostrarProductos();
         mostrarProductosAdmin();
     }
@@ -82,6 +104,7 @@ function eliminarProducto(id) {
     const index = mercaderia.findIndex(r => r.id === id);
     if (index !== -1) {
         mercaderia.splice(index, 1);
+        guardarProductos();
         mostrarProductos();
         mostrarProductosAdmin();
     }
@@ -111,7 +134,7 @@ function mostrarCarrito() {
     carritoDiv.innerHTML = '';
 
     if (carrito.length === 0) {
-        carritoDiv.innerHTML = 'el carrito esta vacio';
+        carritoDiv.innerHTML = '<p>El carrito está vacío</p>';
         return;
     }
 
@@ -125,98 +148,44 @@ function mostrarCarrito() {
         carritoDiv.appendChild(itemDiv);
     });
 
-    const total = carrito.reduce((sum, comida) => sum + comida.precio, 0);
-    const totalDiv = crearElemento('div', 'total', `<h2>Total: $${total}</h2>`);
+    const totalDiv = crearElemento('div', 'total', `Total: $${carrito.reduce((total, comida) => total + comida.precio, 0)}`);
     carritoDiv.appendChild(totalDiv);
 
-    const opcionesDiv = crearElemento('div', 'opciones');
-    opcionesDiv.innerHTML = `
-        <label>
-            <input type="radio" name="entrega" value="retiro" checked onclick="toggleOpcionesEntrega(false)"> Retiro en el local
-        </label>
-        <label>
-            <input type="radio" name="entrega" value="delivery" onclick="toggleOpcionesEntrega(true)"> Delivery
-        </label>
-    `;
+    const opcionesDiv = crearElemento('div', 'opciones', `
+        <label><input type="radio" name="entrega" value="retiro" onclick="mostrarOpcionesEntrega()"> Retiro en el Local</label>
+        <label><input type="radio" name="entrega" value="delivery" onclick="mostrarOpcionesEntrega()"> Delivery</label>
+    `);
     carritoDiv.appendChild(opcionesDiv);
 
-    const nombreDiv = crearElemento('div', 'nombre');
-    nombreDiv.innerHTML = `
-        <label for="nombre">Nombre para el retiro:</label>
-        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
-    `;
+    const nombreDiv = crearElemento('div', 'nombre', `<input type="text" id="nombreRetiro" placeholder="Nombre para retirar" style="display:none;">`);
     carritoDiv.appendChild(nombreDiv);
 
-    const direccionDiv = crearElemento('div', 'direccion');
-    direccionDiv.innerHTML = `
-        <label for="direccion">Dirección de entrega:</label>
-        <input type="text" id="direccion" placeholder="Ingresa tu dirección" disabled>
-    `;
+    const direccionDiv = crearElemento('div', 'direccion', `<input type="text" id="direccionDelivery" placeholder="Dirección de envío" style="display:none;">`);
     carritoDiv.appendChild(direccionDiv);
-
-    const enviarDiv = crearElemento('div', 'enviar');
-    enviarDiv.innerHTML = `
-        <button onclick="enviarPedido()">Enviar Pedido</button>
-    `;
-    carritoDiv.appendChild(enviarDiv);
 }
 
-// Habilitar/deshabilitar campos según la opción de entrega
-function toggleOpcionesEntrega(delivery) {
-    document.getElementById('direccion').disabled = !delivery;
-    document.getElementById('nombre').disabled = delivery;
-}
-
-// Enviar pedido por WhatsApp
-function enviarPedido() {
-    const numeroWhatsApp = '+542302344813';
+function mostrarOpcionesEntrega() {
+    const retiroInput = document.getElementById('nombreRetiro');
+    const deliveryInput = document.getElementById('direccionDelivery');
     const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
-    let mensajeCompleto;
-
-    if (tipoEntrega === 'delivery') {
-        const direccion = document.getElementById('direccion').value.trim();
-        if (!direccion) {
-            alert('Por favor, ingresa una dirección para la entrega.');
-            return;
-        }
-        const mensaje = carrito.map(comida => `${comida.nombre} - $${comida.precio}`).join('\n');
-        const total = carrito.reduce((sum, comida) => sum + comida.precio, 0);
-        mensajeCompleto = `Hola, me gustaría ordenar:\n${mensaje}\nTotal: $${total}\nTipo de entrega: Delivery\nDirección: ${direccion}`;
+    if (tipoEntrega === 'retiro') {
+        retiroInput.style.display = 'block';
+        deliveryInput.style.display = 'none';
     } else {
-        const nombre = document.getElementById('nombre').value.trim();
-        if (!nombre) {
-            alert('Por favor, ingresa tu nombre para el retiro.');
-            return;
-        }
-        const mensaje = carrito.map(comida => `${comida.nombre} - $${comida.precio}`).join('\n');
-        const total = carrito.reduce((sum, comida) => sum + comida.precio, 0);
-        mensajeCompleto = `Hola, me gustaría ordenar:\n${mensaje}\nTotal: $${total}\nTipo de entrega: Retiro en el local\nNombre para el retiro: ${nombre}`;
+        retiroInput.style.display = 'none';
+        deliveryInput.style.display = 'block';
     }
-
-    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensajeCompleto)}`;
-    window.open(urlWhatsApp, '_blank');
 }
 
-// Filtrar productos por nombre
-function filtrarProductos() {
-    const busqueda = document.getElementById('buscar').value.toLowerCase();
-    const productosFiltrados = mercaderia.filter(comida =>
-        comida.nombre.toLowerCase().includes(busqueda)
-    );
-    mostrarProductos(productosFiltrados);
-}
-
-// Mostrar modal de login
+// Funciones de autenticación
 function mostrarLoginModal() {
     document.getElementById('loginModal').style.display = 'block';
 }
 
-// Cerrar modal de login
 function cerrarLoginModal() {
     document.getElementById('loginModal').style.display = 'none';
 }
 
-// Login del administrador
 function login() {
     const user = document.getElementById('adminUser').value;
     const password = document.getElementById('adminPassword').value;
@@ -224,14 +193,16 @@ function login() {
         document.getElementById('admin').style.display = 'block';
         cerrarLoginModal();
     } else {
-        alert('Usuario o contraseña incorrectos');
+        alert('Credenciales incorrectas');
     }
 }
 
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    mostrarProductos();
-    mostrarProductosAdmin();
-    mostrarCarrito();
-});
+// Filtrar productos
+function filtrarProductos() {
+    const filtro = document.getElementById('buscar').value.toLowerCase();
+    const productosFiltrados = mercaderia.filter(comida => comida.nombre.toLowerCase().includes(filtro));
+    mostrarProductos(productosFiltrados);
+}
 
+// Inicializar la aplicación
+document.addEventListener('DOMContentLoaded', cargarProductos);
