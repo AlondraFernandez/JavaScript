@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="shortcut icon" href="./assets/img/white_icon_black_background.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
@@ -21,16 +24,16 @@
                         <a class="nav-link active" aria-current="page" href="../index.html">INICIO</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./pages/pizzas.html">PIZZAS</a>
+                        <a class="nav-link active" aria-current="page" href="./pizzas.html">PIZZAS</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./pages/empanadas.html">EMPANADAS</a>
+                        <a class="nav-link active" aria-current="page" href="./empanadas.html">EMPANADAS</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./pages/mas.html">MAS COSAS RICAS</a>
+                        <a class="nav-link active" aria-current="page" href="./mas.html">MAS COSAS RICAS</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./pages/sobrenosotros.html">SOBRE NOSOTROS</a>
+                        <a class="nav-link active" aria-current="page" href="./sobrenosotros.html">SOBRE NOSOTROS</a>
                       </li>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" href="#">Action</a></li>
@@ -50,6 +53,31 @@
               <button onclick="mostrarLoginModal()">Admin</button></div>
               <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
 </header>
-<script src="../oscuro.js"></script>
+<main>
+    <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
+    <div id="productos"></div>
+    <div id="carrito" class="carrito"></div>
+    <section id="admin">
+        <h2>Administrar Productos</h2>
+        <div>
+            <input type="text" id="nuevoNombre" placeholder="Nombre del Producto">
+            <input type="number" id="nuevoPrecio" placeholder="Precio del Producto">
+            <button onclick="agregarProducto()">Agregar Producto</button>
+        </div>
+        <div id="listaAdmin"></div>
+    </section><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  </main>
+  <div id="loginModal">
+    <div id="loginModalContent">
+        <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
+        <h2>Admin Login</h2>
+        <input type="text" id="adminUser" placeholder="Usuario">
+        <input type="password" id="adminPassword" placeholder="Contraseña">
+        <button onclick="login()">Ingresar</button>
+        
+    </div>
+  </div>
+<script src="../js/pizzas.js"></script>
 </body>
 </html>
