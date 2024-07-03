@@ -46,11 +46,14 @@ function mostrarProductos(productos = mercaderia) {
     const productosDiv = document.getElementById('productos');
     productosDiv.innerHTML = '';
     productos.forEach(comida => {
-        const productoDiv = crearElemento('div', 'producto');
+        const productoDiv = crearElemento('div', 'card');
         productoDiv.innerHTML = `
-            <h2>${comida.nombre}</h2>
-            <p>Precio: $${comida.precio}</p>
-            <button onclick="agregarCarrito(${comida.id})">Agregar al Carrito</button>
+            <img src="ruta/a/la/imagen/${comida.id}.jpg" alt="${comida.nombre}">
+            <div class="card-content">
+                <h2>${comida.nombre}</h2>
+                <p>Precio: $${comida.precio}</p>
+                <button onclick="agregarCarrito(${comida.id})">Agregar al Carrito</button>
+            </div>
         `;
         productosDiv.appendChild(productoDiv);
     });
@@ -162,19 +165,47 @@ function mostrarCarrito() {
 
     const direccionDiv = crearElemento('div', 'direccion', `<input type="text" id="direccionDelivery" placeholder="Dirección de envío" style="display:none;">`);
     carritoDiv.appendChild(direccionDiv);
+
+    const enviarWhatsappBtn = crearElemento('button', 'enviar-whatsapp', 'Enviar Pedido por WhatsApp');
+    enviarWhatsappBtn.onclick = enviarPedidoWhatsapp;
+    carritoDiv.appendChild(enviarWhatsappBtn);
 }
 
+// Mostrar opciones de entrega
 function mostrarOpcionesEntrega() {
-    const retiroInput = document.getElementById('nombreRetiro');
-    const deliveryInput = document.getElementById('direccionDelivery');
-    const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
-    if (tipoEntrega === 'retiro') {
-        retiroInput.style.display = 'block';
-        deliveryInput.style.display = 'none';
-    } else {
-        retiroInput.style.display = 'none';
-        deliveryInput.style.display = 'block';
+    const entregaSeleccionada = document.querySelector('input[name="entrega"]:checked').value;
+    document.getElementById('nombreRetiro').style.display = entregaSeleccionada === 'retiro' ? 'block' : 'none';
+    document.getElementById('direccionDelivery').style.display = entregaSeleccionada === 'delivery' ? 'block' : 'none';
+}
+
+// Enviar pedido por WhatsApp
+function enviarPedidoWhatsapp() {
+    const entregaSeleccionada = document.querySelector('input[name="entrega"]:checked').value;
+    const nombreEntrega = entregaSeleccionada === 'retiro' ? document.getElementById('nombreRetiro').value.trim() : document.getElementById('direccionDelivery').value.trim();
+
+    if (!nombreEntrega) {
+        alert('Por favor, proporciona la información de entrega.');
+        return;
     }
+
+    const numeroWhatsapp = 'TU_NUMERO_DE_WHATSAPP';
+    let mensaje = 'Pedido de Pizzas:\n\n';
+
+    carrito.forEach(comida => {
+        mensaje += `${comida.nombre} - $${comida.precio}\n`;
+    });
+
+    const total = carrito.reduce((total, comida) => total + comida.precio, 0);
+    mensaje += `\nTotal: $${total}\n\n`;
+
+    if (entregaSeleccionada === 'retiro') {
+        mensaje += `Nombre para retirar: ${nombreEntrega}`;
+    } else if (entregaSeleccionada === 'delivery') {
+        mensaje += `Dirección de envío: ${nombreEntrega}`;
+    }
+
+    const urlMensaje = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensaje)}`;
+    window.open(urlMensaje, '_blank');
 }
 
 // Funciones de autenticación
@@ -203,6 +234,48 @@ function filtrarProductos() {
     const productosFiltrados = mercaderia.filter(comida => comida.nombre.toLowerCase().includes(filtro));
     mostrarProductos(productosFiltrados);
 }
+// Alternar modo oscuro
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.classList.toggle('dark-mode'));
+
+    const adminItems = document.querySelectorAll('.admin-item');
+    adminItems.forEach(item => item.classList.toggle('dark-mode'));
+
+    const carritoItems = document.querySelectorAll('.carrito-item');
+    carritoItems.forEach(item => item.classList.toggle('dark-mode'));
+
+    const totalDiv = document.querySelector('.total');
+    if (totalDiv) totalDiv.classList.toggle('dark-mode');
+
+    const opcionesDiv = document.querySelector('.opciones');
+    if (opcionesDiv) opcionesDiv.classList.toggle('dark-mode');
+
+    const nombreDiv = document.querySelector('.nombre input');
+    if (nombreDiv) nombreDiv.classList.toggle('dark-mode');
+
+    const direccionDiv = document.querySelector('.direccion input');
+    if (direccionDiv) direccionDiv.classList.toggle('dark-mode');
+
+    const enviarWhatsappBtn = document.querySelector('.enviar-whatsapp');
+    if (enviarWhatsappBtn) enviarWhatsappBtn.classList.toggle('dark-mode');
+
+    // Guardar preferencia en localStorage
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
+}
+
+// Verificar preferencia de modo oscuro al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) {
+        toggleDarkMode();
+    }
+    document.getElementById('toggleDarkMode').addEventListener('click', toggleDarkMode);
+});
 
 // Inicializar la aplicación
 document.addEventListener('DOMContentLoaded', cargarProductos);
+

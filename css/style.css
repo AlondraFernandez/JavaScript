@@ -1,23 +1,20 @@
-* {
-    margin: 0;
+*{
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
-body {
-    font-family: Arial, sans-serif;
-}
-
 header {
     text-align: center;
     padding: 20px;
     background-color: #ff0000;
     border-bottom: 1px solid #f11b03;
 }
-
+body{
+    background-color: yellow;
+}
 main {
     padding: 30px;
 }
-
 #productos {
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +29,9 @@ main {
     text-align: center;
     width: 200px;
 }
-
+#carrito{
+    display: block;
+}
 .carrito {
     position: fixed;
     top: 10px;
@@ -117,3 +116,59 @@ input[type="text"] {
         width: 90%;
     }
 }
+.servicios {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(./assets/img/fondo-header.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 100px 0;
+  }
+  
+  .servicio-content {
+    text-align: center;
+  }
+  .servicio-content .servicio-1 {
+    padding: 0 100px;
+  }
+  .servicio-content .servicio-1 img {
+    width: 25px;
+    margin-bottom: 15px;
+  }
+  .servicio-content .servicio-1 h3 {
+    color: aliceblue;
+    font-size: 18px;
+  }
+/* Modo claro (por defecto) */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.card.dark-mode {
+    background-color: #1e1e1e;
+}
+
+.admin-item.dark-mode input,
+.admin-item.dark-mode button,
+.carrito-item.dark-mode,
+.total.dark-mode,
+.opciones.dark-mode label,
+.opciones.dark-mode input,
+.nombre.dark-mode input,
+.direccion.dark-mode input {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.enviar-whatsapp.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+

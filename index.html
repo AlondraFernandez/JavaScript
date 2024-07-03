@@ -1,44 +1,129 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="description" content="Encontra las mejores opciones para tus comidas">
+    <meta name="keywords" content="pizzaria,jope,pizzas,empanadas,lugares para comer,comidas con delivey">
+    <title>INICIO|PIZZERIA JOPE </title>
+    <link rel="shortcut icon" href="./assets/img/white_icon_black_background.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Carrito de Compras</title>
 </head>
 <body>
     <header>
-        <h1>Pizzeria Jope</h1>
-        <button onclick="mostrarLoginModal()">Admin</button>
-    </header>
-
-    <main>
-        <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
-        <div id="productos"></div>
-        <div id="carrito" class="carrito"></div>
-        <section id="admin">
-            <h2>Administrar Productos</h2>
-            <div>
-                <input type="text" id="nuevoNombre" placeholder="Nombre del Producto">
-                <input type="number" id="nuevoPrecio" placeholder="Precio del Producto">
-                <button onclick="agregarProducto()">Agregar Producto</button>
-            </div>
-            <div id="listaAdmin"></div>
-        </section>
-    </main>
-
-    <div id="loginModal">
-        <div id="loginModalContent">
-            <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
-            <h2>Admin Login</h2>
-            <input type="text" id="adminUser" placeholder="Usuario">
-            <input type="password" id="adminPassword" placeholder="Contraseña">
-            <button onclick="login()">Ingresar</button>
-        </div>
+        <nav class="navbar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-yellow">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">PIZZERIA JOPE</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">INICIO</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./pages/pizzas.html">PIZZAS</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./pages/empanadas.html">EMPANADAS</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./pages/mascosasricas.html">MAS COSAS RICAS</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./pages/sobrenosotros.html">SOBRE NOSOTROS</a>
+                      </li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+        </nav>
     </div>
-
-    <footer></footer>
-    <script src="./js/index.js"></script>
+    <button onclick="mostrarLoginModal()">Admin</button></div>
+              <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
+    </header>
+    <div class="header">
+      <div class="header-txt">
+        <h1>TIENES <br> <span class="hambre">HAMBRE?</span></h1>
+        <p class="parrafo">TE PRESENTAMOS ALGUNAS OPCIONES </p>
+        <div class="botones">
+          <a href="" class="btn-1">ordena ahora</a>
+          <a href="./pages/pizzas.html" class="btn-1">VER MENU</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    <section class="img-header">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="ajustar" src="./assets/img/white_logo_black_background.png" width="auto" height="200px" alt="">
+            </video>
+          </div>
+          <div class="carousel-item">
+            <img src="./assets/img/_d370d514-f944-47e4-84e8-fa4c2361676a.jpg"  width="auto" height="200px" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="img-header">
+        <img src="./assets/img/fondo-header.jpg" alt="">
+        <main class="servicios" >
+            <div class="servicio-content">
+              <h2> SERVICIOS DE NUESTRA PIZZERIA</h2>
+              <div class="servicio-grupo">
+                  <div class="servicio-1">
+                      <a href="https://wa.me/542302344813?text=Hola%20quiero%20hacer%20un%20pedido" target="_blank">
+                          <img src="./assets/img/icons8-whatsapp-48.png" alt="">
+                      </a>
+                      <h3>ESCRIBINOS</h3>
+                      </div>
+                  </div>
+                  <div class="servicio-1">
+                      <img src="./assets/img/mensajero.png" alt="">
+                      <h3>servicio de cadeteria</h3>
+                  </div>
+                  <div class="servicio-1">
+                      <a href="https://www.google.com/maps/place/Pizzeria+El+Jope/@-35.3844353,-64.4742475,17z/data=!3m1!4b1!4m6!3m5!1s0x95db31c988258585:0xbe49434705039dae!8m2!3d-35.3844353!4d-64.4716726!16s%2Fg%2F11g4lfbj7m?entry=ttu">
+                          <img src="./assets/img/mapa.png" alt="">
+                      </a>
+                      <h3>UBICACION</h3>
+                  </div>
+              </div>
+              </div>
+    </section>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    </main>
+    </section>
+  
+    <section class="container-1">
+      <footer class="py-3 my-4">
+        <p>EL VERDADERO SABOR DE LA MASA ARTESANAL</p>
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
+        <li><a href="https://instagram.com/pizzeriaeljope?igshid=OGQ5ZDc2ODk2ZA=="><img src="./assets/img/instagram.png" alt="logo instagram" width="30px" height="30px"></a></li>
+        <li><a href="https://wa.me/542302344813?text=Hola%20quiero%20hacer%20un%20pedido"><img src="./assets/img/icons8-whatsapp-48.png" alt="logo WhatsApp" width="30px" height="30px"></a></li>
+        </ul>
+        <p class="text-center text-body-secondary">&copy; 2024 Company, Inc</p>
+        <p class="text-center text-body-secondary">Creado por Empre.Dachshund</p>
+      </footer>
+    </section>
+    <script src="./oscuro.js"></script>
 </body>
 </html>
 
