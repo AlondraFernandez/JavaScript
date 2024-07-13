@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "empanadas de carne",
+        "precio": 800
+    },
+    {
+        "id": 2,
+        "nombre": "empanadas de jamon y queso",
+        "precio": 850
+    },
+    {
+        "id": 3,
+        "nombre": "empanadas de roquefort",
+        "precio": 900
+    }
+]

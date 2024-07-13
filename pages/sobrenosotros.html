@@ -3,81 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="shortcut icon" href="./assets/img/white_icon_black_background.ico" type="image/x-icon">
+    <meta name="keywords" content="pizzaria,jope,pizzas,empanadas,luggi,lugares para comer,comidas con delivey">
+    <title>NOSOTROS|JOPE</title>
+    <link rel="shortcut icon" href="../assets/img/white_icon_black_background.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="dark">
     <header>
-    <div>
-        <nav class="navbar">
-            <nav class="navbar navbar-expand-lg navbar-light bg-yellow">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">PIZZERIA JOPE</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.html">INICIO</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./pizzas.html">PIZZAS</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./empanadas.html">EMPANADAS</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./mas.html">MAS COSAS RICAS</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./sobrenosotros.html">SOBRE NOSOTROS</a>
-                      </li>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                      </li>
+        <nav class="navbar navbar-expand-lg navbar-light bg-yellow">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">PIZZERIA JOPE</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../index.html">INICIO</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./pizzas.html">PIZZAS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./empanadas.html">EMPANADAS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  href="./mascosasricas.html">MAS COSAS RICAS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./sobrenosotros.html">SOBRE NOSOTROS</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                  </div>
-                </div>
-              </nav>
-              <button onclick="mostrarLoginModal()">Admin</button></div>
-              <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
-</header>
-<main>
-    <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
-    <div id="productos"></div>
-    <div id="carrito" class="carrito"></div>
-    <section id="admin">
-        <h2>Administrar Productos</h2>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <div class="grid-sobre">
+      <main class="contenido-principal">
+        <article class="article">
+          <h1>UN POCO DE NUESTRO <br>RECORRIDO</h1>
+          <p>Hace 5 años comenzo nuestra aventura,con muchos miedos pero muy felices
+          fuimos cambiando nuestras recetas a medida que nos iban aconsejando
+          nuestros clientes asi pudimos lograr ganarnos el amor 
+          y sobre todo paciencia de cada uno de ustedes.</p>
+        </article>
+        <article class="article">
+          <h1> CONOCE NUESTRO EQUIPO DE  <br>TRABAJO</h1>
+          <p>Nuestro equipo esta conformado por 6 personas
+            LUDMILA: Trabaja en el horno, haciendo arte
+            con sus habilidades de decoracion en las pizzas
+            ALMA: Ella se encarga de las empanadas, tanto de los repulgues
+            como de meterlas al horno para que Ludmi las cocine <br>
+            ORIANA: Atencion al cliente
+            GABRIEL: Se encarga del Delivery <br>
+            JOSI Y ALO: Supervisan jaja, abrimos la pizzeria de lunes a miercoles.</p>
+            <p>SIEMPRE INTENTAMOS DARLES NUESTRO MEJOR ESFUERZO <BR>
+            AUNQUE A VECES COMO HUMANOS IMPERFECTOS FALLAMOS,
+          POR ESO GRACIAS A TODOS POR SU PACIENCIA </BR></p>
+        </article>
+      </main>
+      <aside class="sidebar">
         <div>
-            <input type="text" id="nuevoNombre" placeholder="Nombre del Producto">
-            <input type="number" id="nuevoPrecio" placeholder="Precio del Producto">
-            <button onclick="agregarProducto()">Agregar Producto</button>
+          <h1>LOS MAS <br>PEDIDOS</h1>
+          <img class="medida" src="../assets/img/pizzas-americana.jpg" alt="">
+          <p>AMERICANA 
+            una explocion de sabor
+          </p>
         </div>
-        <div id="listaAdmin"></div>
-    </section><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-  </main>
-  <div id="loginModal">
-    <div id="loginModalContent">
-        <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
-        <h2>Admin Login</h2>
-        <input type="text" id="adminUser" placeholder="Usuario">
-        <input type="password" id="adminPassword" placeholder="Contraseña">
-        <button onclick="login()">Ingresar</button>
-        
+        <div>
+          <img class="medida" src="../assets/img/arabes.jpg" alt="">
+          <p>ARABES mucho gustito a limon</p>
+        </div>
+        <div>
+          <img class="medida" src="../assets/img/tarta especial.jpg" alt="">
+          <p>TARTA ESPECIAL una convinacion unica</p>
+        </div>
+      </aside>
+      <div class="related-post">
+        <a href="https://www.google.com/maps/place/Pizzeria+El+Jope/@-35.3844353,-64.4742475,17z/data=!3m1!4b1!4m6!3m5!1s0x95db31c988258585:0xbe49434705039dae!8m2!3d-35.3844353!4d-64.4716726!16s%2Fg%2F11g4lfbj7m?entry=ttu">UBICACION</a>
+      </div>
+      <div class="related-post">
+        <a href="https://instagram.com/pizzeriaeljope?igshid=OGQ5ZDc2ODk2ZA==">INSTAGRAM</a>
+      </div>
+      <div class="related-post">
+        <a href="../index.html">NUESTRO MENU </a>
+      </div>
     </div>
-  </div>
-<script src="../js/pizzas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<section class="container-1">
+  <footer class="py-3 my-4">
+    <p>EL VERDADERO SABOR DE LA MASA ARTESANAL</p>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
+    <li><a href="https://instagram.com/pizzeriaeljope?igshid=OGQ5ZDc2ODk2ZA=="><img src="../assets/img/instagram.png" alt="logo instagram" width="30px" height="30px"></a></li>
+    <li><a href="https://wa.me/542302344813?text=Hola%20quiero%20hacer%20un%20pedido"><img src="../assets/img/icons8-whatsapp-48.png" alt="logo WhatsApp" width="30px" height="30px"></a></li>
+    </ul>
+    <p class="text-center text-body-secondary">&copy; 2024 Company, Inc</p>
+    <p class="text-center text-body-secondary">Creado por Empre.Dachshund</p>
+  </footer>
+</section>
+<script src="../oscuro.js"></script>
 </body>
 </html>

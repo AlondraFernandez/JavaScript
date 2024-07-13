@@ -84,6 +84,7 @@ input[type="text"] {
     background-color: white;
     border: 1px solid #ccc;
     padding: 10px;
+    width: 300px;
 }
 .admin-item {
     margin-bottom: 10px;
@@ -180,4 +181,88 @@ body.dark-mode {
     background-color: #1e1e1e;
     color: #ffffff;
 }
-
+/*sobre nosotros*/
+.cards{
+    width: 30%;
+    height: 450px;
+    background-color: orange;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h2{
+    color: white;
+}
+.related-post a{
+    text-decoration: none;
+    color: yellow;
+}
+.card__btn{
+    color: black;
+    background-color: aliceblue;
+    text-decoration: none;
+    padding: 10px 30px;
+    width: 10%;
+    display: block;
+    text-transform: capitalize;
+}
+.card__btn:hover{
+    color: yellow;
+}
+.medida{
+    height: 200px;
+    width: 300px;
+}
+.h-1{
+    padding: 20px 0;
+    text-align: center;
+    font-size: 2,9em;
+    text-transform: uppercase;
+}
+.grid-sobre{
+    background-color: yellow;
+    width: 90%;
+    max-width: 1000px;
+    margin: 1.6em auto;
+    display: grid;
+    gap: 1.6em;
+    grid-template-columns: 5,1fr;
+    border: 5px solid red;
+}
+.contenido-principal{
+    padding: 20px;
+    border: 3px solid white;
+}
+.contenido-principal{
+    grid-column: 2;
+}
+.article{
+    background-color: rgb(217, 214, 7);
+    padding: 20px;
+    margin-top: 5px;
+    color: black;
+}
+.sidebar{
+    grid-column: 3;
+    color: black;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: rgb(117, 5, 5);
+}
+.sidebar .medida{
+    margin: 5px;
+}
+.related-post{
+    background-color: black;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    padding: 10px;
+}
+.related-post:hover{
+    cursor: pointer;
+    background-color: beige;
+}

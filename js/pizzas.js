@@ -278,4 +278,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Inicializar la aplicación
 document.addEventListener('DOMContentLoaded', cargarProductos);
-
