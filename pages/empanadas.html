@@ -43,6 +43,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
                 </div>
             </div>
         </nav>
+        <button id="toggleCarrito"><img src="../assets/img/shopping-bag.png" alt=""></button>
+        <div id="carritoContainer" class="carrito-container">
+            <div id="carrito"></div>
+        </div>
         <button onclick="mostrarLoginModal()">Admin</button>
         <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
     </header>
@@ -50,6 +54,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
         <input type="text" id="buscar" placeholder="Descubre el sabor de nuestras empanadas artesanales" oninput="filtrarProductos()">
         <div id="productos"></div>
         <div id="carrito" class="carrito"></div>
+        <section id="admin">
     </main>
 
     <div id="loginModal">
@@ -71,13 +76,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
         <input type="number" id="nuevoStock" placeholder="Nuevo stock">
         <button id="btnAgregarProducto">Agregar Producto</button>
     </div>
-    <div id="loginModal" style="display:none;">
-        <h2>Login</h2>
-        <input type="text" id="adminUser" placeholder="Usuario">
-        <input type="password" id="adminPassword" placeholder="Contraseña">
-        <button onclick="login()">Login</button>
-        <button onclick="cerrarLoginModal()">Cerrar</button>
-    </div>
+    <div id="listaAdmin"></div>
+    <div id="loginModal">
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../empanadas.js"></script>

@@ -7,7 +7,12 @@ const adminCredentials = {
     user: 'admin',
     password: 'admin123'
 };
-
+    // Añadir event listeners a los botones
+    document.querySelectorAll('.btnAgregarCarrito').forEach(button => {
+        button.addEventListener('click', () => {
+            agregarCarrito(button.dataset.id);
+        });
+    });
 // Cargar productos desde localStorage o JSON
 function cargarProductos() {
     const productosGuardados = localStorage.getItem('mercaderia');
@@ -32,7 +37,15 @@ function cargarProductos() {
 function guardarProductos() {
     localStorage.setItem('mercaderia', JSON.stringify(mercaderia));
 }
-
+    // Añadir event listeners a los inputs y botones
+    document.querySelectorAll('.inputModificarProducto').forEach(input => {
+        input.addEventListener('change', (event) => {
+            const id = parseInt(input.dataset.id);
+            const campo = input.dataset.campo;
+            const valor = event.target.value;
+            modificarProducto(id, campo, valor);
+        });
+    });
 // Función para crear un elemento con clase y contenido opcional
 function crearElemento(tag, clase, contenido) {
     const elemento = document.createElement(tag);
@@ -90,7 +103,23 @@ function agregarProducto() {
         alert('Por favor, ingresa un nombre válido y un precio mayor que cero.');
     }
 }
-
+// Agregar event listener para mostrar/ocultar el carrito
+document.getElementById('toggleCarrito').addEventListener('click', () => {
+    const carritoContainer = document.getElementById('carritoContainer');
+    carritoContainer.style.display = carritoContainer.style.display === 'none' ? 'block' : 'none';
+});
+// Mostrar carrito
+function mostrarCarrito() {
+    const carritoDiv = document.getElementById('carrito');
+    carritoDiv.innerHTML = '';
+    carrito.forEach((empanada, index) => {
+        const itemCarrito = crearElemento('div', 'carrito-item');
+        itemCarrito.innerHTML = `
+            <p>${empanada.nombre} - $${empanada.precio}</p>
+            <button class="btnEliminarCarrito" data-index="${index}">Eliminar</button>
+        `;
+        carritoDiv.appendChild(itemCarrito);
+    });}
 // Modificar producto
 function modificarProducto(id, campo, valor) {
     const producto = mercaderia.find(r => r.id === id);
@@ -117,7 +146,11 @@ function eliminarProducto(id) {
 function agregarCarrito(id) {
     const comida = mercaderia.find(r => r.id === id);
     carrito.push(comida);
-    alert(`${comida.nombre} se agregó a tu carrito.`);
+    Swal.fire({
+        icon: 'success',
+        title: 'Agregado',
+        text: `${comida.nombre} se agregó a tu carrito.`,
+    });
     mostrarCarrito();
 }
 
@@ -126,7 +159,11 @@ function eliminarDelCarrito(id) {
     const index = carrito.findIndex(r => r.id === id);
     if (index !== -1) {
         const [comida] = carrito.splice(index, 1);
-        alert(`${comida.nombre} ha sido eliminado del carrito.`);
+        Swal.fire({
+            icon: 'success',
+            title: 'Agregado',
+            text: `${comida.nombre} se elimino de tu carrito.`,
+        });
         mostrarCarrito();
     }
 }
@@ -184,7 +221,11 @@ function enviarPedidoWhatsapp() {
     const nombreEntrega = entregaSeleccionada === 'retiro' ? document.getElementById('nombreRetiro').value.trim() : document.getElementById('direccionDelivery').value.trim();
 
     if (!nombreEntrega) {
-        alert('Por favor, proporciona la información de entrega.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `por favor proporcione nombre de entrega.`,
+        });
         return;
     }
 

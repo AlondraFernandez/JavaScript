@@ -32,25 +32,14 @@ main {
 #carrito{
     display: block;
 }
-.carrito {
-    position: fixed;
-    top: 10px;
-    right: 5px;
-    width: 200px;
-    border: 1px solid #ff5500;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #ffdd00;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    background-image: url(../assets/img/shopping-bag.png);
-    background-repeat: no-repeat;
-    background-position: down;
-}
+
 
 .carrito-item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .total, .opciones, .nombre, .direccion {
@@ -84,6 +73,34 @@ input[type="text"] {
     border: 1px solid #ccc;
     padding: 10px;
     width: 300px;
+}
+.carrito-container {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.total {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.btnEliminarCarrito {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.btnEliminarCarrito:hover {
+    background-color: darkred;
 }
 .admin-item {
     margin-bottom: 10px;

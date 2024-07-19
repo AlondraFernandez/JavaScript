@@ -52,9 +52,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
                   </div>
                 </div>
               </nav>
-              <button onclick="mostrarLoginModal()">Admin</button></div>
+              <button id="toggleCarrito">Carrito</button>
+
               <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
 </header>
+ <!-- Contenedor del carrito -->
+ <div id="carritoContainer" class="carrito-container">
+  <div id="carrito"></div>
+</div>
 <main>
   <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
   <div id="productos"></div>
@@ -64,6 +69,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
       <div>
           <input type="text" id="nuevoNombre" placeholder="Nombre del Producto">
           <input type="number" id="nuevoPrecio" placeholder="Precio del Producto">
+          <input type="number" id="nuevoStock" placeholder="Nuevo stock">
           <button onclick="agregarProducto()">Agregar Producto</button>
       </div>
       <div id="listaAdmin"></div>
@@ -81,9 +87,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
   </div>
 </div>
 <footer></footer>
-<src del script="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js
-"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/pizzas.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 </body>
 </html>

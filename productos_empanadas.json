@@ -2,6 +2,7 @@
     {
         "id": 1,
         "nombre": "empanadas de carne",
+        "imagen":"./assets/img/pizza-muzza-2.jpg",
         "precio": 800
     },
     {

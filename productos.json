@@ -2,6 +2,7 @@
     {
         "id": 1,
         "nombre": "Pizza Margarita",
+        "imagen":"./assets/img/pizza-muzza-2.jpg",
         "precio": 800
     },
     {
