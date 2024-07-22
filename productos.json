@@ -8,11 +8,13 @@
     {
         "id": 2,
         "nombre": "Pizza Pepperoni",
+        "imagen":"./assets/img/pizza-muzza-2.jpg",
         "precio": 850
     },
     {
         "id": 3,
         "nombre": "Pizza Cuatro Quesos",
+        "imagen":"./assets/img/pizza-muzza-2.jpg",
         "precio": 900
     }
 ]

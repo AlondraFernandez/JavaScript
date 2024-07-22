@@ -56,14 +56,77 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
 
               <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
 </header>
- <!-- Contenedor del carrito -->
- <div id="carritoContainer" class="carrito-container">
-  <div id="carrito"></div>
-</div>
 <main>
   <input type="text" id="buscar" placeholder="El verdadero sabor de la masa artesanal" oninput="filtrarProductos()">
-  <div id="productos"></div>
-  <div id="carrito" class="carrito"></div>
+  <!-- Mercadería -->
+  <div id="productos-container">
+    <div class="card">
+        <h2>Muzzarella</h2>
+        <img src="../assets/img/pizza-muzza.jpg" alt=""  class="imagen">
+        <p>salsa,Muzzarella,oregano,aceitunas</p>
+        <p>Precio: $583.33c/u</p>
+        <input type="number" value="1" min="1" id="cantidad-producto-1">
+        <button class="agregar-al-carrito" data-nombre="Producto 1" data-precio="10" data-id="1">Agregar al carrito</button>
+    </div>
+    <div class="card">
+        <h2>Americana</h2>
+        <img src="../assets/img/pizzas-americana.jpg" alt="" class="imagen">
+        <p class="card-text">salsa,Muzzarella,Panceta ahumada,huevo frito,aceitunas.</p>
+        <p>Precio: $583.33c/u</p>
+        <input type="number" value="1" min="1" id="cantidad-producto-2">
+        <button class="agregar-al-carrito" data-nombre="Producto 2" data-precio="20" data-id="2">Agregar al carrito</button>
+    </div>
+    <div class="card">
+        <h2>CAPRESSE</h2>
+        <img src="../assets/img/pizza-anchoas-2.jpg" alt=""  class="imagen">
+        <p class="card-text">Salsa,Muzzarella,Oregano,Anchoas y Aceitunas.</p>
+        <p>Precio: $583.33c/u</p>
+        <input type="number" value="1" min="1" id="cantidad-producto-2">
+        <button class="agregar-al-carrito" data-nombre="Producto 2" data-precio="20" data-id="2">Agregar al carrito</button>
+    </div>
+    <!-- Agregar más productos según sea necesario -->
+</div>
+
+<!-- Carrito -->
+<h2>Carrito</h2>
+<button onclick="toggleCarrito()">Mostrar/Ocultar Carrito</button>
+<div id="carrito-container" style="display: none;">
+    <ul id="carrito-lista"></ul>
+    <p id="total"></p>
+
+    <!-- Horarios de entrega -->
+    <h3>Seleccione un horario</h3>
+    <select id="horarios">
+        <option value="19:30">19:30</option>
+        <option value="20:00">20:00</option>
+        <option value="20:30">20:30</option>
+        <option value="21:00">21:00</option>
+        <option value="21:30">21:30</option>
+        <option value="22:00">22:00</option>
+        <option value="22:30">22:30</option>
+        <option value="23:00">23:00</option>
+    </select>
+
+    <!-- Información de entrega -->
+    <h3>Tipo de entrega</h3>
+    <input type="radio" id="delivery" name="entrega" value="Delivery">
+    <label for="delivery">Delivery</label>
+    <input type="radio" id="local" name="entrega" value="Local">
+    <label for="local">Retiro en local</label>
+
+    <div id="ubicacion-container" style="display: none;">
+        <label for="ubicacion">Ingrese su dirección:</label>
+        <input type="text" id="ubicacion">
+    </div>
+
+    <!-- Datos del cliente -->
+    <h3>Datos del Cliente</h3>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre">
+
+    <!-- Botón para enviar pedido por WhatsApp -->
+    <button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
+</div>
   <section id="admin">
       <h2>Administrar Productos</h2>
       <div>
@@ -88,7 +151,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
 </div>
 <footer></footer>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../js/pizzas.js"></script>
+<script src="../carrito.js"></script>
+<script src="../oscuro.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 </body>
 </html>
