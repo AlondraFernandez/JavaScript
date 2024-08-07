@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMAPANADAS | PIZZERIA JOPE</title>
-    <enlace href="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
-"rel="hoja de estilo">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -35,6 +33,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="./sobrenosotros.html">SOBRE NOSOTROS</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./admin.html">Admin</a>
+                        </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,42 +44,47 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
                 </div>
             </div>
         </nav>
-        <button onclick="mostrarLoginModal()">Admin</button>
         <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
     </header>
-    <h1>Carrito de Compras</h1>
-    
+    <input type="text" id="buscar" placeholder="Descubre el sabor de nuestras empanadas artesanales" oninput="filtrarProductos()">
     <!-- Mercadería -->
     <div id="productos-container">
         <div class="card">
             <h2>Carne</h2>
             <img src="../assets/img/EMPANADAS DE CARNE.jpg" alt=""  class="imagen">
-            <p>Carne de vaca molina,Condimentos,Aceitunas</p>
-            <p>Precio: $583.33c/u</p>
+            <p>Carne de ternera molida, condimentos, aceitunas</p>
+            <p>Precio: $400 c/u</p>
             <input type="number" value="1" min="1" id="cantidad-producto-1">
-            <button class="agregar-al-carrito" data-nombre="Producto 1" data-precio="10" data-id="1">Agregar al carrito</button>
+            <button class="agregar-al-carrito" data-nombre="emp Carne" data-precio="400" data-id="1">Agregar al carrito</button>
         </div>
         <div class="card">
-            <h2>JAMON Y QUESO</h2>
+            <h2>Jamon y Queso</h2>
             <img src="../assets/img/jamon y queso.jpg" alt="" class="imagen">
-            <p class="card-text">Jamon y Muzzarella.</p>
-            <p>Precio: $583.33c/u</p>
+            <p class="card-text">Jamon y muzzarella.</p>
+            <p>Precio: $400 c/u</p>
             <input type="number" value="1" min="1" id="cantidad-producto-2">
-            <button class="agregar-al-carrito" data-nombre="Producto 2" data-precio="20" data-id="2">Agregar al carrito</button>
+            <button class="agregar-al-carrito" data-nombre="emp Jamon y Queso" data-precio="400" data-id="2">Agregar al carrito</button>
         </div>
         <div class="card">
-            <h2>CAPRESSE</h2>
+            <h2>Capresse</h2>
             <img src="../assets/img/CanastitasCaprese.jpg" alt=""  class="imagen">
-            <p class="card-text">Tomate,Albaca,Muzzarella.</p>
-            <p>Precio: $583.33c/u</p>
-            <input type="number" value="1" min="1" id="cantidad-producto-2">
-            <button class="agregar-al-carrito" data-nombre="Producto 2" data-precio="20" data-id="2">Agregar al carrito</button>
+            <p class="card-text">Tomate, albahaca, muzzarella.</p>
+            <p>Precio: $400 c/u</p>
+            <input type="number" value="1" min="1" id="cantidad-producto-3">
+            <button class="agregar-al-carrito" data-nombre="emp Capresse" data-precio="400" data-id="3">Agregar al carrito</button>
+        </div>
+        <div class="card">
+            <h2>Arabes</h2>
+            <img src="../assets/img/arabes.jpg" alt=""  class="imagen">
+            <p>Cebolla, carne de ternera, limón</p>
+            <p>Precio: $400 c/u</p>
+            <input type="number" value="1" min="1" id="cantidad-producto-4">
+            <button class="agregar-al-carrito" data-nombre="emp Arabes" data-precio="400" data-id="4">Agregar al carrito</button>
         </div>
         <!-- Agregar más productos según sea necesario -->
     </div>
 
     <!-- Carrito -->
-    <h2>Carrito</h2>
     <button onclick="toggleCarrito()">Mostrar/Ocultar Carrito</button>
     <div id="carrito-container" style="display: none;">
         <ul id="carrito-lista"></ul>
@@ -118,35 +124,24 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
         <button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
     </div>
     <main>
-        <input type="text" id="buscar" placeholder="Descubre el sabor de nuestras empanadas artesanales" oninput="filtrarProductos()">
         <section id="admin">
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     </main>
-
-    <div id="loginModal">
-        <div id="loginModalContent">
-            <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
-            <h2>Admin Login</h2>
-            <input type="text" id="adminUser" placeholder="Usuario">
-            <input type="password" id="adminPassword" placeholder="Contraseña">
-            <button onclick="login()">Ingresar</button>
-        </div>
-    </div>
-    <div id="admin" style="display:none;">
-        <h2>Administración</h2>
-        <div id="listaAdmin"></div>
-        <input type="text" id="nuevoNombre" placeholder="Nuevo nombre">
-        <input type="number" id="nuevoPrecio" placeholder="Nuevo precio">
-        <input type="number" id="nuevoStock" placeholder="Nuevo stock">
-        <button id="btnAgregarProducto">Agregar Producto</button>
-    </div>
-    <div id="loginModal">
-    <footer></footer>
+    <footer class="py-3 my-4">
+        <p>EL VERDADERO SABOR DE LA MASA ARTESANAL</p>
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
+        <li><a href="https://instagram.com/pizzeriaeljope?igshid=OGQ5ZDc2ODk2ZA=="><img src="../assets/img/instagram.png" alt="logo instagram" width="20px" height="20px"></a></li>
+        <li><a href="https://wa.me/542302344813?text=Hola%20quiero%20hacer%20un%20pedido"><img src="../assets/img/icons8-whatsapp-48.png" alt="logo WhatsApp" width="30px" height="30px"></a></li>
+        </ul>
+        <p class="text-center text-body-secondary">&copy; 2024 Company, Inc</p>
+        <p class="text-center text-body-secondary">Creado por Empre.Dachshund</p>
+      </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../carrito.js"></script>
     <script src="../oscuro.js"></script>
     <script src="../empanadas.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="../js/buscador.js"></script>
 </body>
 </html>
