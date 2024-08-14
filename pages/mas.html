@@ -6,29 +6,89 @@
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+    <header>
+        <div>
+            <nav class="navbar">
+                <nav class="navbar navbar-expand-lg navbar-light bg-yellow">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">PIZZERIA JOPE</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../index.html">INICIO</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./pizzas.html">PIZZAS</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./empanadas.html">EMPANADAS</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./mas.html">MAS COSAS RICAS</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./sobrenosotros.html">SOBRE NOSOTROS</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./admin.html">ADMIN</a>
+                          </li>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="#">Action</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                        <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                      </div>
+                    </div>
+                  </nav>
+                  <button id="toggleCarrito">Carrito</button>
+    
+                  <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
+    </header>
     <h1>Carrito de Compras</h1>
     
     <!-- Mercadería -->
+
     <div id="productos-container">
         <div class="card">
-            <h2>Producto 1</h2>
-            <p>Precio: $10</p>
-            <input type="number" value="1" min="1" id="cantidad-producto-1">
-            <button class="agregar-al-carrito" data-nombre="Producto 1" data-precio="10" data-id="1">Agregar al carrito</button>
-        </div>
-        <div class="card">
-            <h2>Producto 2</h2>
-            <p>Precio: $20</p>
+            <h2>Tarta de Jamon y Queso</h2>
+            <img src="../assets/img/tarta jamon y queso.jpg" alt="" class="imagen">
+            <p class="card-text">Paleta y Muzzarella</p>
+            <p>Precio: $8000c/u</p>
             <input type="number" value="1" min="1" id="cantidad-producto-2">
-            <button class="agregar-al-carrito" data-nombre="Producto 2" data-precio="20" data-id="2">Agregar al carrito</button>
-        </div>
-        <!-- Agregar más productos según sea necesario -->
+            <button class="agregar-al-carrito" data-nombre="Tarta Jamon y Queso" data-precio="20" data-id="2">Agregar al carrito</button>
+          </div>
+        <div class="card">
+            <h2>Tarta Especial</h2>
+            <img src="../assets/img/tarta especial.jpg" alt="" class="imagen">
+            <p class="card-text">Paleta,Muzzarella,Tomates,Huevo duro,Morron y aceitunas</p>
+            <p>Precio: $8000c/u</p>
+            <input type="number" value="1" min="1" id="cantidad-producto-2">
+            <button class="agregar-al-carrito" data-nombre="Tarta Especial" data-precio="20" data-id="2">Agregar al carrito</button>
+          </div>
+        <div class="card">
+            <h2>Calzone</h2>
+            <img src="../assets/img/calzone.webp" alt="" class="imagen">
+            <p class="card-text">Paleta y Muzzarella</p>
+            <p>Precio: $8000c/u</p>
+            <input type="number" value="1" min="1" id="cantidad-producto-2">
+            <button class="agregar-al-carrito" data-nombre="Calzone" data-precio="20" data-id="2">Agregar al carrito</button>
+          </div>
     </div>
 
     <!-- Carrito -->
-    <h2>Carrito</h2>
     <button onclick="toggleCarrito()">Mostrar/Ocultar Carrito</button>
     <div id="carrito-container" style="display: none;">
         <ul id="carrito-lista"></ul>
@@ -67,6 +127,12 @@
         <!-- Botón para enviar pedido por WhatsApp -->
         <button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
     </div>
+    <main>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    </main>
     <footer class="py-3 my-4">
         <p>EL VERDADERO SABOR DE LA MASA ARTESANAL</p>
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -78,6 +144,9 @@
         <p class="text-center text-body-secondary">Creado por Empre.Dachshund</p>
       </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../oscuro.js"></script>
     <script src="../carrito.js"></script>
+    <script src="../cliente.js"></script>
+    <script src="../productos.js"></script>
 </body>
 </html>
