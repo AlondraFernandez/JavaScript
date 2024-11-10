@@ -231,7 +231,7 @@ document.querySelectorAll('input[name="entrega"]').forEach(radio => {
         ubicacionContainer.style.display = this.value === 'Delivery' ? 'block' : 'none';
     });
 });
-/* client.js
+ /*client.js
 const cart = [];
 
 function displayProducts() {

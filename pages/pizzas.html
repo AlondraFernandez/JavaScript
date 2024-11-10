@@ -55,6 +55,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
                   </div>
                 </div>
               </nav>
+              <button id="toggleCarrito">Carrito</button>
 
               <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
 </header>
@@ -233,12 +234,23 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css
     </div>
     <!-- Agregar más productos según sea necesario -->
 </div>
-
 <!-- Carrito -->
 <button onclick="toggleCarrito()">Mostrar/Ocultar Carrito</button>
 <div id="carrito-container" style="display: none;">
     <ul id="carrito-lista"></ul>
     <p id="total"></p>
+    <!-- Horarios de entrega -->
+    <h3>Seleccione un horario</h3>
+    <select id="horarios">
+        <option value="19:30">19:30</option>
+        <option value="20:00">20:00</option>
+        <option value="20:30">20:30</option>
+        <option value="21:00">21:00</option>
+        <option value="21:30">21:30</option>
+        <option value="22:00">22:00</option>
+        <option value="22:30">22:30</option>
+        <option value="23:00">23:00</option>
+    </select>
 <!-- Repetir para otros productos -->
 
     <!-- Información de entrega -->
