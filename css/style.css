@@ -161,11 +161,11 @@ footer{
   }
 /* Modo claro (por defecto) */
 body {
-    background-color: #ffa600;
+    background-color: #ffd982;
     color: #000000;
 }
 .card{
-    border: 3px solid #000000;
+    filter: drop-shadow(1px 1px 20px red);
     padding: 10px;
 }
 
@@ -180,7 +180,7 @@ body.dark-mode {
 .card.dark-mode {
     background-color: #f3f3f3;
     color: #060606;
-    border: 2px solid red;
+    filter: drop-shadow(1px 1px 10px red);
 }
 
 .admin-item.dark-mode input,
