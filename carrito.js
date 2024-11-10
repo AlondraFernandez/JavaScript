@@ -197,41 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('carrito-container').style.display = 'block';
     }
 });
- // Simular inicio de sesión del administrador
- function login() {
-    const adminUser = document.getElementById('adminUser').value;
-    const adminPassword = document.getElementById('adminPassword').value;
-
-    if (adminUser === 'admin' && adminPassword === '1234') {
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('admin').style.display = 'block';
-    } else {
-        alert('Usuario o contraseña incorrecta');
-    }
-}
-
-function mostrarLoginModal() {
-    document.getElementById('loginModal').style.display = 'block';
-}
-
-function cerrarLoginModal() {
-    document.getElementById('loginModal').style.display = 'none';
-}
-
-// Mostrar el modal de inicio de sesión de administrador al cargar la página
-window.onload = function() {
-    mostrarLoginModal();
-};
-
-function agregarProducto() {
-    const nombre = document.getElementById('nuevoNombre').value;
-    const precio = document.getElementById('nuevoPrecio').value;
-    const stock = document.getElementById('nuevoStock').value;
-
-    // Aquí debes agregar la lógica para agregar el producto a tu lista de productos
-    console.log(`Producto agregado: ${nombre}, Precio: ${precio}, Stock: ${stock}`);
-}
-
 function toggleCarrito() {
     const carritoContainer = document.getElementById('carrito-container');
     carritoContainer.style.display = carritoContainer.style.display === 'none' ? 'block' : 'none';
@@ -251,11 +216,10 @@ function enviarPedido() {
     const nombre = document.getElementById('nombre').value;
     const ubicacion = document.getElementById('ubicacion').value;
     const entrega = document.querySelector('input[name="entrega"]:checked').value;
-    const horario = document.getElementById('horarios').value;
 
     const carritoItems = Array.from(document.querySelectorAll('#carrito-lista li')).map(item => item.textContent).join(', ');
 
-    const mensaje = `Hola, mi nombre es ${nombre}. Quisiera hacer un pedido de ${carritoItems}. La entrega sería a las ${horario} por ${entrega === 'Delivery' ? `delivery a la dirección ${ubicacion}` : 'retiro en local'}.`;
+    const mensaje = ` ${nombre}. Quisiera hacer un pedido de ${carritoItems}. La entrega sería a las ${horario} por ${entrega === 'Delivery' ? `delivery a la dirección ${ubicacion}` : 'retiro en local'}.`;
 
     const whatsappUrl = `https://wa.me/542302344813?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
@@ -267,7 +231,7 @@ document.querySelectorAll('input[name="entrega"]').forEach(radio => {
         ubicacionContainer.style.display = this.value === 'Delivery' ? 'block' : 'none';
     });
 });
-// client.js
+/* client.js
 const cart = [];
 
 function displayProducts() {
@@ -347,4 +311,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   displayProducts();
   displayCart();
-});
+});*/

@@ -57,7 +57,16 @@
               <button id="toggleDarkMode"><img src="../assets/img/moon.png" alt=""></button>
 </header>
     <h1>Administración de Productos</h1>
-
+<!-- Modal de inicio de sesión de administrador -->
+<div id="loginModal" style="display: none;">
+  <div id="loginModalContent">
+      <span onclick="cerrarLoginModal()" style="float:right;cursor:pointer;">&times;</span>
+      <h2>Admin Login</h2>
+      <input type="text" id="adminUser" placeholder="Usuario">
+      <input type="password" id="adminPassword" placeholder="Contraseña">
+      <button onclick="login()">Ingresar</button>
+  </div>
+</div>
     <h2>Agregar Producto</h2>
     <form id="productForm">
         <label for="productName">Nombre del Producto:</label>
