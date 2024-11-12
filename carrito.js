@@ -1,15 +1,5 @@
-// Carrito y horarios disponibles
+// Carrito y horarios disponibles (eliminado la lógica de horarios)
 let carrito = [];
-const horariosDisponibles = {
-    '19:30': true,
-    '20:00': true,
-    '20:30': true,
-    '21:00': true,
-    '21:30': true,
-    '22:00': true,
-    '22:30': true,
-    '23:00': true
-};
 
 // Cargar carrito desde localStorage
 function cargarCarrito() {
@@ -99,18 +89,8 @@ function eliminarDelCarrito(index) {
     guardarCarrito();
 }
 
-// Manejar cambio de horario
-document.getElementById('horarios').addEventListener('change', function() {
-    const selectedTime = this.value;
-    if (!horariosDisponibles[selectedTime]) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Este horario ya ha sido seleccionado. Por favor, elija otro.'
-        });
-        this.value = '';
-    }
-});
+// Elimino el manejo de la selección de horarios
+
 
 // Mostrar/ocultar campo de ubicación según el tipo de entrega
 document.querySelectorAll('input[name="entrega"]').forEach(radio => {
@@ -135,6 +115,7 @@ function enviarPedido() {
         });
         return;
     }
+    
     const horario = document.getElementById('horarios').value;
     if (!horario) {
         Swal.fire({
@@ -144,16 +125,7 @@ function enviarPedido() {
         });
         return;
     }
-    if (!horariosDisponibles[horario]) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Este horario ya ha sido seleccionado. Por favor, elija otro.'
-        });
-        return;
-    }
-    horariosDisponibles[horario] = false;
-
+    
     const entrega = document.querySelector('input[name="entrega"]:checked').value;
     let ubicacion = '';
     if (entrega === 'Delivery') {
@@ -168,16 +140,22 @@ function enviarPedido() {
         }
     }
 
-    const carritoTexto = carrito.map(item => `${item.nombre} - $${item.precio} x ${item.cantidad}`).join(', ');
-    const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+    // Crear texto para WhatsApp con ajustes por media pizza
+    const carritoTexto = carrito.map(item => {
+        const esMediaPizza = item.nombre.includes('Media Pizza');
+        const cantidadAjustada = esMediaPizza ? 0.5 : item.cantidad;
+        return `${item.nombre} - $${item.precio} x ${cantidadAjustada}`;
+    }).join(', ');
+
+    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
 
     let mensaje = `Pedido de ${nombre}\nProductos: ${carritoTexto}\nTotal: $${total}\nHorario: ${horario}\nEntrega: ${entrega}`;
     if (ubicacion) {
         mensaje += `\nUbicación: ${ubicacion}`;
     }
 
-    const whatsappURL = `https://wa.me/2302344813?text=${encodeURIComponent(mensaje)}`;
-    window.open(whatsappURL, '_blank');
+    const whatsappUrl = `https://wa.me/542302344813?text=${encodeURIComponent(mensaje)}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // Añadir event listener a los botones de agregar al carrito
@@ -187,8 +165,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = this.getAttribute('data-nombre');
             const precio = parseFloat(this.getAttribute('data-precio'));
             const id = this.getAttribute('data-id');
-            const cantidad = parseInt(document.getElementById(`cantidad-producto-${id}`).value);
-            agregarAlCarrito(nombre, precio, cantidad);
+            let cantidad = parseInt(document.getElementById(`cantidad-producto-${id}`).value);
+            
+            // Verificar si el usuario seleccionó media pizza
+            if (cantidad === 0.5) {
+                nombre = nombre + " (Media Pizza)";  // Cambiar el nombre a "Media Pizza"
+            }
+            
+            // Ajustar el precio si es media pizza
+            const precioAjustado = (cantidad === 0.5) ? precio / 2 : precio;
+            
+            agregarAlCarrito(nombre, precioAjustado, cantidad);
         });
     });
     cargarCarrito();
@@ -197,6 +184,95 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('carrito-container').style.display = 'block';
     }
 });
+
+// Función para agregar productos al carrito
+function agregarAlCarrito(nombre, precio, cantidad) {
+    if (cantidad <= 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Cantidad no válida',
+            text: 'La cantidad debe ser mayor que 0.',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    }
+
+    const itemExistente = carrito.find(item => item.nombre === nombre);
+    if (itemExistente) {
+        itemExistente.cantidad += cantidad;
+        if (nombre.includes("Media Pizza")) {
+            itemExistente.precio = itemExistente.precio / 2;
+        }
+    } else {
+        carrito.push({ nombre, precio, cantidad });
+    }
+    registrarVenta(nombre, precio, cantidad);
+    actualizarCarrito();
+    guardarCarrito();
+    Swal.fire({
+        icon: 'success',
+        title: 'Producto agregado',
+        text: `${cantidad} ${nombre} ha sido agregado al carrito.`,
+        showConfirmButton: false,
+        timer: 1500
+    });
+    const carritoContainer = document.getElementById('carrito-container');
+    carritoContainer.style.display = 'block';
+}
+
+// Función para registrar la venta
+function registrarVenta(nombre, precio, cantidad) {
+    const ventasGuardadas = localStorage.getItem('ventas');
+    let ventas = ventasGuardadas ? JSON.parse(ventasGuardadas) : [];
+    ventas.push({ producto: nombre, precio, cantidad });
+    localStorage.setItem('ventas', JSON.stringify(ventas));
+}
+
+// Actualizar visualización del carrito
+function actualizarCarrito() {
+    const carritoLista = document.getElementById('carrito-lista');
+    carritoLista.innerHTML = '';
+    let total = 0;
+    carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nombre} - $${item.precio} x ${item.cantidad} 
+            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
+        carritoLista.appendChild(li);
+        total += item.precio * item.cantidad;
+    });
+    document.getElementById('total').textContent = `Total: $${total}`;
+}
+
+// Eliminar producto del carrito
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+    guardarCarrito();
+}
+
+// Función para guardar carrito en localStorage
+function guardarCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(carrito)); // Convertir a JSON
+}
+
+// Función para cargar carrito desde localStorage
+function cargarCarrito() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+        carrito = JSON.parse(carritoGuardado); // Parsear JSON
+    }
+    actualizarCarrito();
+}
+
+// Alternar visibilidad del carrito
+function toggleCarrito() {
+    const carritoContainer = document.getElementById('carrito-container');
+    carritoContainer.style.display = carritoContainer.style.display === 'none' ? 'block' : 'none';
+}
+
+
+
 function toggleCarrito() {
     const carritoContainer = document.getElementById('carrito-container');
     carritoContainer.style.display = carritoContainer.style.display === 'none' ? 'block' : 'none';
@@ -212,25 +288,15 @@ function filtrarProductos() {
     });
 }
 
-function enviarPedido() {
-    const nombre = document.getElementById('nombre').value;
-    const ubicacion = document.getElementById('ubicacion').value;
-    const entrega = document.querySelector('input[name="entrega"]:checked').value;
-
-    const carritoItems = Array.from(document.querySelectorAll('#carrito-lista li')).map(item => item.textContent).join(', ');
-
-    const mensaje = ` ${nombre}. Quisiera hacer un pedido de ${carritoItems}. La entrega sería a las ${horario} por ${entrega === 'Delivery' ? `delivery a la dirección ${ubicacion}` : 'retiro en local'}.`;
-
-    const whatsappUrl = `https://wa.me/542302344813?text=${encodeURIComponent(mensaje)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
+// Mostrar campo de ubicación si es Delivery
 document.querySelectorAll('input[name="entrega"]').forEach(radio => {
     radio.addEventListener('change', function() {
         const ubicacionContainer = document.getElementById('ubicacion-container');
         ubicacionContainer.style.display = this.value === 'Delivery' ? 'block' : 'none';
     });
 });
+
+
  /*client.js
 const cart = [];
 
