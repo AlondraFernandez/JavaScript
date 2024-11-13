@@ -116,19 +116,11 @@ function enviarPedido() {
         return;
     }
     
-    const horario = document.getElementById('horarios').value;
-    if (!horario) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Por favor, seleccione un horario.'
-        });
-        return;
-    }
-    
+    // Obtener la opción de entrega (Delivery o Retiro en el local)
     const entrega = document.querySelector('input[name="entrega"]:checked').value;
     let ubicacion = '';
     if (entrega === 'Delivery') {
+        // Si es Delivery, pedimos la dirección
         ubicacion = document.getElementById('ubicacion').value;
         if (!ubicacion) {
             Swal.fire({
@@ -140,20 +132,22 @@ function enviarPedido() {
         }
     }
 
-    // Crear texto para WhatsApp con ajustes por media pizza
-    const carritoTexto = carrito.map(item => {
-        const esMediaPizza = item.nombre.includes('Media Pizza');
-        const cantidadAjustada = esMediaPizza ? 0.5 : item.cantidad;
-        return `${item.nombre} - $${item.precio} x ${cantidadAjustada}`;
-    }).join(', ');
+    // Preparar los productos del carrito
+    const carritoTexto = carrito.map(item => `${item.nombre} - $${item.precio} x ${item.cantidad}`).join(', ');
+    const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
 
-    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-
-    let mensaje = `Pedido de ${nombre}\nProductos: ${carritoTexto}\nTotal: $${total}\nHorario: ${horario}\nEntrega: ${entrega}`;
-    if (ubicacion) {
+    // Crear el mensaje
+    let mensaje = `Pedido de ${nombre}\nProductos: ${carritoTexto}\nTotal: $${total}\nEntrega: ${entrega}`;
+    
+    // Si es Delivery, incluir la ubicación
+    if (entrega === 'Delivery' && ubicacion) {
         mensaje += `\nUbicación: ${ubicacion}`;
+    } else if (entrega === 'Retiro') {
+        // Si es Retiro, agregar la nota de que es para retirar en el local
+        mensaje += `\nRetiro en el local`;
     }
 
+    // Enviar mensaje por WhatsApp
     const whatsappUrl = `https://wa.me/542302344813?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
 }
@@ -165,17 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = this.getAttribute('data-nombre');
             const precio = parseFloat(this.getAttribute('data-precio'));
             const id = this.getAttribute('data-id');
-            let cantidad = parseInt(document.getElementById(`cantidad-producto-${id}`).value);
-            
-            // Verificar si el usuario seleccionó media pizza
-            if (cantidad === 0.5) {
-                nombre = nombre + " (Media Pizza)";  // Cambiar el nombre a "Media Pizza"
-            }
-            
-            // Ajustar el precio si es media pizza
-            const precioAjustado = (cantidad === 0.5) ? precio / 2 : precio;
-            
-            agregarAlCarrito(nombre, precioAjustado, cantidad);
+            const cantidad = parseInt(document.getElementById(`cantidad-producto-${id}`).value);
+            agregarAlCarrito(nombre, precio, cantidad);
         });
     });
     cargarCarrito();
@@ -185,91 +170,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Función para agregar productos al carrito
-function agregarAlCarrito(nombre, precio, cantidad) {
-    if (cantidad <= 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Cantidad no válida',
-            text: 'La cantidad debe ser mayor que 0.',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        return;
-    }
-
-    const itemExistente = carrito.find(item => item.nombre === nombre);
-    if (itemExistente) {
-        itemExistente.cantidad += cantidad;
-        if (nombre.includes("Media Pizza")) {
-            itemExistente.precio = itemExistente.precio / 2;
-        }
-    } else {
-        carrito.push({ nombre, precio, cantidad });
-    }
-    registrarVenta(nombre, precio, cantidad);
-    actualizarCarrito();
-    guardarCarrito();
-    Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado',
-        text: `${cantidad} ${nombre} ha sido agregado al carrito.`,
-        showConfirmButton: false,
-        timer: 1500
-    });
-    const carritoContainer = document.getElementById('carrito-container');
-    carritoContainer.style.display = 'block';
-}
-
-// Función para registrar la venta
-function registrarVenta(nombre, precio, cantidad) {
-    const ventasGuardadas = localStorage.getItem('ventas');
-    let ventas = ventasGuardadas ? JSON.parse(ventasGuardadas) : [];
-    ventas.push({ producto: nombre, precio, cantidad });
-    localStorage.setItem('ventas', JSON.stringify(ventas));
-}
-
-// Actualizar visualización del carrito
-function actualizarCarrito() {
-    const carritoLista = document.getElementById('carrito-lista');
-    carritoLista.innerHTML = '';
-    let total = 0;
-    carrito.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `${item.nombre} - $${item.precio} x ${item.cantidad} 
-            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
-        carritoLista.appendChild(li);
-        total += item.precio * item.cantidad;
-    });
-    document.getElementById('total').textContent = `Total: $${total}`;
-}
-
-// Eliminar producto del carrito
-function eliminarDelCarrito(index) {
-    carrito.splice(index, 1);
-    actualizarCarrito();
-    guardarCarrito();
-}
-
-// Función para guardar carrito en localStorage
-function guardarCarrito() {
-    localStorage.setItem('carrito', JSON.stringify(carrito)); // Convertir a JSON
-}
-
-// Función para cargar carrito desde localStorage
-function cargarCarrito() {
-    const carritoGuardado = localStorage.getItem('carrito');
-    if (carritoGuardado) {
-        carrito = JSON.parse(carritoGuardado); // Parsear JSON
-    }
-    actualizarCarrito();
-}
-
-// Alternar visibilidad del carrito
 function toggleCarrito() {
     const carritoContainer = document.getElementById('carrito-container');
     carritoContainer.style.display = carritoContainer.style.display === 'none' ? 'block' : 'none';
 }
+
+function filtrarProductos() {
+    const query = document.getElementById('buscar').value.toLowerCase();
+    const productos = document.querySelectorAll('#productos-container .producto');
+
+    productos.forEach(producto => {
+        const nombre = producto.querySelector('.card-title').textContent.toLowerCase();
+        producto.style.display = nombre.includes(query) ? 'block' : 'none';
+    });
+}
+
+// Mostrar campo de ubicación si es Delivery
+document.querySelectorAll('input[name="entrega"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const ubicacionContainer = document.getElementById('ubicacion-container');
+        ubicacionContainer.style.display = this.value === 'Delivery' ? 'block' : 'none';
+    });
+});
+
+
 
 
 
